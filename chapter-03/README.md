@@ -25,7 +25,7 @@
 
 ### 3.2.1. Basic Implementation: Calculator
 
-#### Walkthrough project structure
+#### Step 1: Walkthrough project structure
 
 - `src/main/java`
 - `src/test/java`
@@ -33,7 +33,7 @@
   - `testImplementation`
   - `junit`
 
-#### Create these files
+#### Step 2: Create these files
 
 - `Calculator.java`
 - `CalculatorTest.java`
@@ -52,9 +52,7 @@ class Calculator {
 }
 ```
 
-#### Example 3.2.1.2: Test Code
-
-##### Arrange, Act, Assert (AAA)
+##### Step 3: Arrange, Act, Assert (AAA)
 
 ```java
 package com.werockstar.chapter03;
@@ -71,6 +69,13 @@ class CalculatorTest {
     }
 }
 ```
+
+##### Step 4: How to Run?
+
+- Function-level
+- Class-level
+- Package-level
+- `./gradlew test`
 
 ### 3.2.2.1 Namming the Test
 
