@@ -9,33 +9,35 @@ import java.io.FileWriter;
 public class TextFile {
 
     public void create(String fileName) {
-    	try {
-    		FileWriter fileWriter = new FileWriter(fileName);
-    		fileWriter.close();
-    	} catch (Exception ignored) {   
-    	}
-    }   
+        try {
+            FileWriter fileWriter = new FileWriter(fileName);
+            fileWriter.close();
+        } catch (Exception ignored) {
+        }
+    }
+
     public void write(String fileName, String content) {
-    	try {
-    		FileWriter fileWriter = new FileWriter(fileName, true);
-    		fileWriter.write(content);
-    		fileWriter.write("\n");
-    		fileWriter.close();
-    	} catch (Exception ignored) {
-    	}
-    }   
+        try {
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            fileWriter.write(content);
+            fileWriter.write("\n");
+            fileWriter.close();
+        } catch (Exception ignored) {
+        }
+    }
+
     public String read(String fileName) {
-    	StringBuilder content = new StringBuilder();
-    	try {
-    		FileReader fileReader = new FileReader(fileName);
-    		int i;
-    		while ((i = fileReader.read()) != -1) {
-    			content.append((char) i);
-    		}
-    		fileReader.close();
-    	} catch (Exception ignored) {
-    	}
-    	return content.toString().trim();
+        StringBuilder content = new StringBuilder();
+        try {
+            FileReader fileReader = new FileReader(fileName);
+            int i;
+            while ((i = fileReader.read()) != -1) {
+                content.append((char) i);
+            }
+            fileReader.close();
+        } catch (Exception ignored) {
+        }
+        return content.toString().trim();
     }
 }
 
@@ -77,8 +79,8 @@ class NoteTest {
     @DisplayName("given initial note my note should be empty")
     void initialNoteShouldBeEmpty() {
         TextFile textFile = new TextFile();
-        Note note = new Note(textFile); 
-    
+        Note note = new Note(textFile);
+
         String actual = note.read();
 
         String expected = "";
@@ -124,7 +126,7 @@ class StubReadingNote extends TextFile {
 
 ```java
 class NoteTest {
-    
+
     @Test
     @DisplayName("my default note file should be note.txt")
     void defaultNoteFile() {
@@ -154,7 +156,7 @@ class SpyNoteFileName extends TextFile {
 
 ```java
 class NoteTest {
-    
+
     @Test
     @DisplayName("initial note should create note.txt only one time")
     void createNoteFileOnlyOneTime() {
@@ -191,7 +193,7 @@ class SpyNoteFileName extends TextFile {
 
 ```java
 class NoteTest {
-    
+
     @Test
     @DisplayName("write reading note should call write method on TextFile")
     void writeNote() {
@@ -220,12 +222,12 @@ class MockWriteTextFile extends TextFile {
 ```
 
 ## Step 8: Additional feature: Birthday emoji 🎂 and create `BirthdayChecker`
-    
+
 ```java
 import java.time.LocalDateTime;
 
 public class BirthdayChecker {
-    
+
     boolean isBirthdayToday() {
         LocalDateTime today = LocalDateTime.now();
         return today.getDayOfMonth() == 1 && today.getMonthValue() == 1;
@@ -235,7 +237,7 @@ public class BirthdayChecker {
 
 ```java
 class NoteTest {
-    
+
     @Test
     @DisplayName("given today is my birthday write reading note should contain 🎂")
     void writeNoteOnMyBirthday() {
@@ -251,7 +253,7 @@ class NoteTest {
 }
 
 class StubBirthdayChecker extends BirthdayChecker {
-    
+
     @Override
     boolean isBirthdayToday() {
         return true;
