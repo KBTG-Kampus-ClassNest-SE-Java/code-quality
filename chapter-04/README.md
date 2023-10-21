@@ -221,7 +221,27 @@ class MockWriteTextFile extends TextFile {
 }
 ```
 
-## Step 8: Additional feature: Birthday emoji 🎂 and create `BirthdayChecker`
+## Step 8: Additional feature: Birthday emoji 🎂, create `BirthdayChecker`, edit `Note` and `NoteTest`
+
+```java
+class Note {
+    private BirthdayChecker birthdayChecker; // add this line
+
+    // add another constructor
+    public Note(TextFile textFile, BirthdayChecker birthdayChecker) {
+        this.textFile = textFile;
+        this.birthdayChecker = birthdayChecker;
+    }
+
+    // edit write function
+    public void write(String content) {
+        if (birthdayChecker.isBirthdayToday()) {
+            content += " 🎂";
+        }
+        textFile.write(DEFAULT_FILE_NAME, content);
+    }
+}
+```
 
 ```java
 import java.time.LocalDateTime;
