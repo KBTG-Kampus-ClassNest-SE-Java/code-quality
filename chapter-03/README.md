@@ -176,7 +176,7 @@ class CalculatorTest {
 }
 ```
 
-#### Example 3.2.2.4: Too many test cases?
+#### Example 3.2.2.4: Parameterized Test
 
 ```java
 package com.werockstar.chapter03;
@@ -196,6 +196,40 @@ class CalculatorTest {
 
         assertEquals(expected, result);
    }
+
+}
+```
+
+#### Example 3.2.2.5: Using Setup and Teardown
+
+
+```java
+package com.werockstar.chapter03;
+
+class CalculatorTest {
+
+    private Calculator calculator;
+
+    @BeforeEach
+    void setUp() {
+        calculator = new Calculator();
+    }
+
+    @Test
+    @DisplayName("1 + 1 = 2")
+    void addShouldReturn2() {
+        int result = calculator.add(1, 1);
+
+        assertEquals(2, result);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"2, 1, 1", "2, 2, 0", "3, 3, 0"})
+    void subtract(int leftOperand, int rightOperand, int expected) {
+        int result = calculator.subtract(leftOperand, rightOperand);
+
+        assertEquals(expected, result);
+    }
 
 }
 ```
