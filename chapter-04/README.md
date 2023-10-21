@@ -281,3 +281,71 @@ class StubBirthdayChecker extends BirthdayChecker {
 
 }
 ```
+
+### Step 7.9: Additional feature: Support `async` write
+
+### Step 8: Add `RxJava3` for handling background tasks
+
+```groovy
+implementation "io.reactivex.rxjava3:rxjava:3.1.8"
+```
+
+### Step 9: Add writeAsync function on `Note`
+
+```java
+class Note {
+
+    // add this method
+    public Completable writeAsync(String content) {
+        return Completable.fromAction(() -> write(content)).subscribeOn(Schedulers.io());
+    }
+}
+```
+
+### Step 10: Create new test for `writeAsync` function
+
+```java
+class NoteTest {
+
+    @Test
+    @DisplayName("given write reading note async should save reading correctly")
+    void writeAsyncNote() {
+        TextFile textFile = new MockWriteTextFile();
+        BirthdayChecker birthdayChecker = new StubBirthdayChecker();
+        Note note = new Note(textFile, birthdayChecker);
+
+        note.writeAsync("Reading book")
+            .test()
+            .assertComplete();
+    }
+}
+```
+
+### Step 11: Inject `Scheduler`
+
+```java
+import java.util.concurrent.ScheduledFuture;class Note {
+
+    // Inject scheduler
+    public Completable writeAsync(String content, Schedule schedule) {
+        return Completable.fromAction(() -> write(content)).subscribeOn(schedule);
+    }
+}
+```
+
+```java
+class NoteTest {
+
+    @Test
+    @DisplayName("given write reading note async should success")
+    void writeAsyncNoteShouldSuccess() {
+        TextFile textFile = new MockWriteTextFile();
+        BirthdayChecker birthdayChecker = new StubBirthdayChecker();
+        Note note = new Note(textFile, birthdayChecker);
+
+        note.writeAsync("Reading book", Schedulers.trampoline())
+            .test()
+            .assertComplete();
+    }
+}
+```

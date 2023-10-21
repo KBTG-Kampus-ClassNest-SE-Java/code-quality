@@ -1,3 +1,4 @@
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -71,6 +72,19 @@ class NoteTest {
 
 		String expected = "Reading book 🎂";
 		assertEquals(expected, textFile.getContentWasWritten());
+	}
+
+
+	@Test
+	@DisplayName("given write reading note async should success")
+	void writeAsyncNoteShouldSuccess() {
+		TextFile textFile = new MockWriteTextFile();
+		BirthdayChecker birthdayChecker = new StubBirthdayChecker();
+		Note note = new Note(textFile, birthdayChecker);
+
+		note.writeAsync("Reading book", Schedulers.trampoline())
+			.test()
+			.assertComplete();
 	}
 }
 
