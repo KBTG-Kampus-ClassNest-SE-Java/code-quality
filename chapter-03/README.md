@@ -45,8 +45,8 @@ package com.werockstar.chapter03;
 
 class Calculator {
 
-    int add(int a, int b) {
-        return a + b;
+    int add(int leftOperand, int rightOperand) {
+        return leftOperand + rightOperand;
     }
 
 }
@@ -60,7 +60,7 @@ package com.werockstar.chapter03;
 class CalculatorTest {
 
     @Test
-    void testAdd() {
+    void addShouldReturn3() {
         Calculator calculator = new Calculator();
         
         int result = calculator.add(1, 2);
@@ -79,11 +79,11 @@ class CalculatorTest {
 
 ### 3.2.2.1 Namming the Test
 
-#### Revise 1: Namming Test Method
+#### Steps 1: Revise Namming Test Method
 
 - testAdd -> `given1Add2ShouldReturn3`
-- testAdd -> `given_1_add_2_should_return_3`
-- testAdd -> `whenAdd1and2ShouldReturn3`
+- addShouldReturn3 -> `given_1_add_2_should_return_3`
+- addShouldReturn3 -> `whenAdd1and2ShouldReturn3`
 
 ```java
 package com.werockstar.chapter03;
@@ -101,6 +101,25 @@ class CalculatorTest {
 }
 ```
 
+#### Steps 2: Using `@DisplayName`
+
+```java
+package com.werockstar.chapter03;
+
+class CalculatorTest {
+
+    @Test
+    @DisplayName("1 + 2 = 3")
+    void addShouldReturn3() {
+        Calculator calculator = new Calculator();
+        
+        int result = calculator.add(1, 2);
+        
+        assertEquals(3, result);
+    }
+}
+```
+
 #### Example 3.2.2.2: Function `subtract`
 
 ```java
@@ -108,8 +127,8 @@ package com.werockstar.chapter03;
 
 class Calculator {
 
-    int subtract(int a, int b) {
-        return a - b;
+    int subtract(int leftOperand, int rightOperand) {
+        return leftOperand - rightOperand;
     }
 }
 ```
@@ -120,12 +139,63 @@ package com.werockstar.chapter03;
 class CalculatorTest {
 
     @Test
-    void given_2_subtract_1_should_return_minus_1() {
+    void given_2_subtract_1_should_return_1() {
         Calculator calculator = new Calculator();
         
         int result = calculator.subtract(2, 1);
         
         assertEquals(1, result);
     }
+}
+```
+
+#### Example 3.2.2.3: Function `subtract` with Parameterized Test
+
+```java
+package com.werockstar.chapter03;
+
+class CalculatorTest {
+
+    @Test
+    void given_2_subtract_2_should_return_0() {
+        Calculator calculator = new Calculator();
+        
+        int result = calculator.subtract(2, 2);
+        
+        assertEquals(0, result);
+    }
+
+    @Test
+    void given_3_subtract_3_should_return_0() {
+        Calculator calculator = new Calculator();
+        
+        int result = calculator.subtract(3, 3);
+        
+        assertEquals(0, result);
+    }
+}
+```
+
+#### Example 3.2.2.4: Too many test cases?
+
+```java
+package com.werockstar.chapter03;
+
+class CalculatorTest {
+
+    @ParameterizedTest
+    @CsvSource({
+       "2, 1, 1",
+       "2, 2, 0",
+       "3, 3, 0"
+    })
+    void subtract(int leftOperand, int rightOperand, int expected) {
+        var calculator = new Calculator();
+    
+        int result = calculator.subtract(leftOperand, rightOperand);
+
+        assertEquals(expected, result);
+   }
+
 }
 ```
