@@ -218,3 +218,44 @@ class MockWriteTextFile extends TextFile {
     }
 }
 ```
+
+## Step 8: Additional feature: Birthday emoji 🎂 and create `BirthdayChecker`
+    
+```java
+import java.time.LocalDateTime;
+
+public class BirthdayChecker {
+    
+    boolean isBirthdayToday() {
+        LocalDateTime today = LocalDateTime.now();
+        return today.getDayOfMonth() == 1 && today.getMonthValue() == 1;
+    }
+}
+```
+
+```java
+class NoteTest {
+    
+    @Test
+    @DisplayName("given today is my birthday write reading note should contain 🎂")
+    void writeNoteOnMyBirthday() {
+        MockWriteTextFile textFile = new MockWriteTextFile();
+        BirthdayChecker birthdayChecker = new StubBirthdayChecker();
+        Note note = new Note(textFile, birthdayChecker);
+
+        note.write("Reading book");
+
+        String expected = "Reading book 🎂";
+        assertEquals(expected, textFile.getContentWasWritten());
+    }
+}
+
+class StubBirthdayChecker extends BirthdayChecker {
+    
+    @Override
+    boolean isBirthdayToday() {
+        return true;
+    }
+
+}
+```

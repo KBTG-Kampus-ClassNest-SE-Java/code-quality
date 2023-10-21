@@ -59,6 +59,19 @@ class NoteTest {
 
 		assertTrue(textFile.isWriteCalled());
 	}
+
+	@Test
+	@DisplayName("given today is my birthday write reading note should contain 🎂")
+	void writeNoteOnMyBirthday() {
+		MockWriteTextFile textFile = new MockWriteTextFile();
+		BirthdayChecker birthdayChecker = new StubBirthdayChecker();
+		Note note = new Note(textFile, birthdayChecker);
+
+		note.write("Reading book");
+
+		String expected = "Reading book 🎂";
+		assertEquals(expected, textFile.getContentWasWritten());
+	}
 }
 
 class StubReadingNote extends TextFile {
@@ -95,13 +108,26 @@ class SpyNoteFileName extends TextFile {
 class MockWriteTextFile extends TextFile {
 
 	private boolean writeWasCalled;
+	private String contentWasWritten;
 
 	@Override
 	public void write(String fileName, String content) {
 		writeWasCalled = true;
+		contentWasWritten = content;
 	}
 
 	public boolean isWriteCalled() {
 		return writeWasCalled;
+	}
+
+	public String getContentWasWritten() {
+		return contentWasWritten;
+	}
+}
+
+class StubBirthdayChecker extends BirthdayChecker {
+	@Override
+	boolean isBirthdayToday() {
+		return true;
 	}
 }

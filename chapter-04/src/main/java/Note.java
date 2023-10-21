@@ -1,10 +1,16 @@
 public class Note {
 	private final String DEFAULT_FILE_NAME = "note.txt";
 	private final TextFile textFile;
+	private BirthdayChecker birthdayChecker;
 
 	public Note(TextFile textFile) {
 		this.textFile = textFile;
 		this.create();
+	}
+
+	public Note(TextFile textFile, BirthdayChecker birthdayChecker) {
+		this.textFile = textFile;
+		this.birthdayChecker = birthdayChecker;
 	}
 
 	private void create() {
@@ -12,6 +18,9 @@ public class Note {
 	}
 
 	public void write(String content) {
+		if (birthdayChecker != null && birthdayChecker.isBirthdayToday()) {
+			content += " 🎂";
+		}
 		textFile.write(DEFAULT_FILE_NAME, content);
 	}
 
