@@ -349,3 +349,29 @@ class NoteTest {
     }
 }
 ```
+
+### Step 12: Add `mockito`
+
+```groovy
+testImplementation 'org.mockito:mockito-core:5.6.0'
+```
+
+### Step 13: Apply `mockito`
+
+```java
+class NoteTest {
+    
+    @Test
+    @DisplayName("mockito: create reading book note should return reading book")
+    void createReadingNoteWithMockito() {
+        TextFile textFile = mock(TextFile.class);
+        when(textFile.read("note.txt")).thenReturn("Reading book");
+        Note note = new Note(textFile);
+
+        note.write("Reading book");
+
+        String expected = "Reading book";
+        assertEquals(expected, note.read());
+    }
+}
+```

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class NoteTest {
 
@@ -85,6 +87,20 @@ class NoteTest {
 		note.writeAsync("Reading book", Schedulers.trampoline())
 			.test()
 			.assertComplete();
+	}
+
+	@Test
+	@DisplayName("mockito: create reading book note should return reading book")
+	void createReadingNoteWithMockito() {
+		TextFile textFile = mock(TextFile.class);
+		when(textFile.read("note.txt")).thenReturn("Reading book");
+
+		Note note = new Note(textFile);
+
+		note.write("Reading book");
+
+		String expected = "Reading book";
+		assertEquals(expected, note.read());
 	}
 }
 
