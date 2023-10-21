@@ -302,7 +302,7 @@ class Note {
 }
 ```
 
-### Step 10: Create new test for `writeAsync` function
+### Step 10: Create new test for `writeAsync` function 🔥
 
 ```java
 class NoteTest {
@@ -321,7 +321,7 @@ class NoteTest {
 }
 ```
 
-### Step 11: Inject `Scheduler`
+### Step 11: Inject `Scheduler` to `writeAsync` function ✅
 
 ```java
 import java.util.concurrent.ScheduledFuture;class Note {
@@ -360,7 +360,7 @@ testImplementation 'org.mockito:mockito-core:5.6.0'
 
 ```java
 class NoteTest {
-    
+
     @Test
     @DisplayName("mockito: create reading book note should return reading book")
     void createReadingNoteWithMockito() {
