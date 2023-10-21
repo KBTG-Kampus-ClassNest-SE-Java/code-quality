@@ -9,26 +9,26 @@
 
 ## 3.2 Basic Implementation
 
-- jUnit5
-- @Test
+- `jUnit5`
+- `@Test`
 - Arrange, Act, Assert (AAA)
   - Arrange: set up the test
   - Act: execute the test
   - Assert: verify behavior and results that we're expecting
-- @DisplayName
-- @Disabled
-- @BeforeEach
-- @AfterEach
-- @BeforeAll
-- @AfterAll
-- @Nested
+- `@DisplayName`
+- `@Disabled`
+- `@BeforeEach`
+- `@AfterEach`
+- `@BeforeAll`
+- `@AfterAll`
+- `@Nested`
 
 ### 3.2.1. Basic Implementation: Calculator
 
-- Calculator.java
-- CalculatorTest.java
+- `Calculator.java`
+- `CalculatorTest.java`
 
-#### Example: Production Code
+#### Example 3.2.1: Production Code
 
 ```java
 package com.werockstar.chapter03;
@@ -53,7 +53,9 @@ class Calculator {
 }
 ```
 
-#### Example: Test Code
+#### Example 3.2.1: Test Code
+
+##### Arrange, Act, Assert (AAA)
 
 ```java
 package com.werockstar.chapter03;
@@ -61,14 +63,32 @@ package com.werockstar.chapter03;
 class CalculatorTest {
 
     @Test
-    @DisplayName("Test add method")
     void testAdd() {
         Calculator calculator = new Calculator();
-     
+        
         int result = calculator.add(1, 2);
-     
+        
         assertEquals(3, result);
     }
 }
+```
 
+#### Revise 1: Namming Test Method
+
+- testAdd -> `given1Add2ShouldReturn3`
+- testAdd -> `given_1_add_2_should_return_3`
+- testAdd -> `whenAdd1and2ShouldReturn3`
+
+```java
+package com.werockstar.chapter03;
+
+class CalculatorTest {
+
+    @Test
+    void given_1_add_2_should_return_3() {
+        Calculator calculator = new Calculator();
+        int result = calculator.add(1, 2);
+        assertEquals(3, result);
+    }
+}
 ```
