@@ -235,7 +235,7 @@ class Note {
 
     // edit write function
     public void write(String content) {
-        if (birthdayChecker.isBirthdayToday()) {
+        if (birthdayChecker.isBirthday()) {
             content += " 🎂";
         }
         textFile.write(DEFAULT_FILE_NAME, content);
@@ -248,7 +248,7 @@ import java.time.LocalDateTime;
 
 public class BirthdayChecker {
 
-    boolean isBirthdayToday() {
+    boolean isBirthday() {
         LocalDateTime today = LocalDateTime.now();
         return today.getDayOfMonth() == 1 && today.getMonthValue() == 1;
     }
@@ -275,7 +275,7 @@ class NoteTest {
 class StubBirthdayChecker extends BirthdayChecker {
 
     @Override
-    boolean isBirthdayToday() {
+    boolean isBirthday() {
         return true;
     }
 

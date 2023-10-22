@@ -1,6 +1,5 @@
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Scheduler;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class Note {
 	private final String DEFAULT_FILE_NAME = "note.txt";
@@ -22,7 +21,7 @@ public class Note {
 	}
 
 	public void write(String content) {
-		if (birthdayChecker != null && birthdayChecker.isBirthdayToday()) {
+		if (birthdayChecker != null && birthdayChecker.isBirthday()) {
 			content += " 🎂";
 		}
 		textFile.write(DEFAULT_FILE_NAME, content);

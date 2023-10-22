@@ -10,9 +10,9 @@ import static org.mockito.Mockito.when;
 class NoteTest {
 
 	@Test
-	@DisplayName("given initial note my note should be empty")
+	@DisplayName("given initial note my, note should be empty")
 	void initialNoteShouldBeEmpty() {
-		TextFile textFile = new TextFile();
+		TextFile textFile = new MockWriteTextFile();
 		Note note = new Note(textFile);
 
 		String expected = "";
@@ -21,7 +21,7 @@ class NoteTest {
 	}
 
 	@Test
-	@DisplayName("create reading book note should return reading book")
+	@DisplayName("create reading book note, my note should return reading book")
 	void createReadingNote() {
 		TextFile textFile = new StubReadingNote();
 		Note note = new Note(textFile);
@@ -43,7 +43,7 @@ class NoteTest {
 	}
 
 	@Test
-	@DisplayName("initial note should create note.txt only one time")
+	@DisplayName("initial note should create note.txt only one file")
 	void createNoteFileOnlyOneTime() {
 		SpyNoteFileName textFile = new SpyNoteFileName();
 		Note note = new Note(textFile);
@@ -64,7 +64,7 @@ class NoteTest {
 	}
 
 	@Test
-	@DisplayName("given today is my birthday write reading note should contain 🎂")
+	@DisplayName("given today is my birthday write reading note and my note should contain 🎂")
 	void writeNoteOnMyBirthday() {
 		MockWriteTextFile textFile = new MockWriteTextFile();
 		BirthdayChecker birthdayChecker = new StubBirthdayChecker();
@@ -114,6 +114,11 @@ class StubReadingNote extends TextFile {
 	public void create(String fileName) {
 
 	}
+
+	@Override
+	public void write(String fileName, String content) {
+
+	}
 }
 
 class SpyNoteFileName extends TextFile {
@@ -146,6 +151,11 @@ class MockWriteTextFile extends TextFile {
 		contentWasWritten = content;
 	}
 
+	@Override
+	public void create(String fileName) {
+
+	}
+
 	public boolean isWriteCalled() {
 		return writeWasCalled;
 	}
@@ -157,7 +167,7 @@ class MockWriteTextFile extends TextFile {
 
 class StubBirthdayChecker extends BirthdayChecker {
 	@Override
-	boolean isBirthdayToday() {
+	boolean isBirthday() {
 		return true;
 	}
 }
