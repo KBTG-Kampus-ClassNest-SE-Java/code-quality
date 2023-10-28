@@ -1,0 +1,58 @@
+plugins {
+	id 'java'
+	id 'com.diffplug.spotless' version '6.22.0'
+}
+
+group = 'com.werockstar'
+version = '1.0-SNAPSHOT'
+
+repositories {
+	mavenCentral()
+}
+
+spotless {
+	java {
+		removeUnusedImports()
+		indentWithTabs()
+	}
+}
+
+task copyGitHooks(type: Copy) {
+	description 'Copies the git hooks from /git-hooks to the .git folder.'
+	from("${rootDir}/git-hooks/") {
+		include '**/*.sh'
+		rename '(.*).sh', '$1'
+	}
+	into "${rootDir}/.git/hooks"
+	onlyIf { isLinuxOrMacOs() }
+}
+
+static def isLinuxOrMacOs() {
+	def osName = System.getProperty('os.name').toLowerCase(Locale.ROOT)
+	return osName.contains('linux') || osName.contains('mac os') || osName.contains('macos')
+}
+
+task installGitHooks(type: Exec) {
+	description 'Installs the pre-commit.sh git hooks from /git-hooks.'
+	group 'git hooks'
+	workingDir rootDir
+	commandLine 'chmod'
+	args '-R', '+x', '.git/hooks/'
+	dependsOn copyGitHooks
+	onlyIf { isLinuxOrMacOs() }
+	doLast {
+		logger.info('Git hook installed successfully.')
+	}
+}
+
+dependencies {
+	testImplementation platform('org.junit:junit-bom:5.9.1')
+	testImplementation 'org.junit.jupiter:junit-jupiter'
+
+	testImplementation 'org.mockito:mockito-core:5.6.0'
+	implementation "io.reactivex.rxjava3:rxjava:3.1.8"
+}
+
+test {
+	useJUnitPlatform()
+}
