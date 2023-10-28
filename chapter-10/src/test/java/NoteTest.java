@@ -74,7 +74,7 @@ class NoteTest {
 
 		note.write("Reading book");
 
-		String expected = "Reading book 🎂";
+		String expected = "Reading book";
 		verify(textFile).write("note.txt", expected);
 	}
 
