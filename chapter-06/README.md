@@ -337,5 +337,7 @@ public class FizzBuzz {
 ```
 
 ## Step 14: Exercise
+
 - Add input 10 return `"Buzz"`
+- Remember: Refactoring after test pass
 - Add input 15 return `"FizzBuzz"`
