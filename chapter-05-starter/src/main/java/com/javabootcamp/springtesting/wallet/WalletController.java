@@ -24,7 +24,7 @@ public class WalletController {
     }
 
     @PostMapping("")
-    public Wallet createWallet(@Valid @RequestBody WalletRequestDto requestDto) throws Exception {
+    public Wallet createWallet(@Valid @RequestBody WalletRequestDto requestDto) {
         return this.walletService.createWallet(requestDto);
     }
 
