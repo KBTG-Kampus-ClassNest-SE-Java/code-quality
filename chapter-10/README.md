@@ -35,3 +35,11 @@ jobs:
 ```bash
 ./gradlew test
 ```
+
+## Step 4: Install Pre-Commit
+
+```bash
+./gradlew installGitHooks
+```
+
+## Step 5: Commit and Make it fail
