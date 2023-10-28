@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.TestConfiguration;
 
 @TestConfiguration(proxyBeanMethods = false)
-public class TestChapter05StarterApplication {
+public class StarterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.from(StarterApplication::main).with(TestChapter05StarterApplication.class).run(args);
+        SpringApplication.from(com.javabootcamp.springtesting.StarterApplication::main).with(StarterApplication.class).run(args);
     }
 
 }

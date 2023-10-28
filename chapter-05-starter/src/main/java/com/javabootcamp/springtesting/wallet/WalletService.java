@@ -17,7 +17,6 @@ public class WalletService {
         return walletRepository.findAll();
     }
 
-
     public Wallet createWallet(WalletRequestDto requestDto) {
         Wallet wallet = new Wallet();
         wallet.setWalletName(requestDto.getName());
