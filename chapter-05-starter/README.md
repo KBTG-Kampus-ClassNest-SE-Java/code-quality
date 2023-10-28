@@ -1,6 +1,6 @@
 # Chapter 5: Spring Testing
 
-## Step 0: Init database
+## Step 0: Start and Stop Database with Docker Compose
 
 ```shell
 docker compose up -d
@@ -9,9 +9,8 @@ docker compose down
 
 ## Step 1: Walkthrough project structure
 
-- Dependencies
-    - Spring Test (`starter-test`)
-    - Testcontainers (`testcontainers`)
+- Dependencies 
+  - Test (`starter-test`)
 
 ## Step 2: Walkthrough Wallet application
 
@@ -57,7 +56,7 @@ class WalletControllerTest {
     }
 
     @Test
-    @DisplayName("when perform on /api/wallets/me should return Hello, Wallet!")
+    @DisplayName("when perform on GET: /api/wallets/me should return Hello, Wallet!")
     void walletMessage() throws Exception {
         mockMvc.perform(get("/api/wallets/me"))
                 .andExpect(jsonPath("$.message", is("Hello, Wallet!")))
