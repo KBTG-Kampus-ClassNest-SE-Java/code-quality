@@ -7,7 +7,7 @@ public class FizzBuzzTest {
 
     @Test
     @DisplayName("input 1 should return 1")
-    void input1ShouldReturn() {
+    void input1ShouldReturn1() {
         FizzBuzz fizzBuzz = new FizzBuzz();
 
         String actualResult = fizzBuzz.fizzBuzz(1);
