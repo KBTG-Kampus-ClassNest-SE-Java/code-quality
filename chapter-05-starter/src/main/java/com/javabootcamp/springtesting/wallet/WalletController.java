@@ -26,13 +26,6 @@ public class WalletController {
     public Wallet createWallet(@Valid @RequestBody WalletRequestDto requestDto) {
         return this.walletService.createWallet(requestDto);
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteWalletById(@PathVariable Integer id) {
-        this.walletService.deleteWalletById(id);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
 }
 
 

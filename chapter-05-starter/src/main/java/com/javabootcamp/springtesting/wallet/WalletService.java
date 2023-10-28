@@ -25,8 +25,4 @@ public class WalletService {
         walletRepository.save(wallet);
         return wallet;
     }
-
-    public void deleteWalletById(Integer id) {
-        walletRepository.deleteById(Long.valueOf(id));
-    }
 }
