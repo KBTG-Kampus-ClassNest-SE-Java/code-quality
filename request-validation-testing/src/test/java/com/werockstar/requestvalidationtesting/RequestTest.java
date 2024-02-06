@@ -25,7 +25,9 @@ public class RequestTest {
     void ageShouldBePositive() {
         String dummyName = "WeRockStar";
         Request request = new Request(dummyName, 23);
+
         var violations = validator.validate(request);
+
         assertThat(violations).isEmpty();
     }
 
@@ -33,14 +35,18 @@ public class RequestTest {
     void nameShouldNotBeEmpty() {
         int dummyAge = 23;
         Request request = new Request("WeRockStar", dummyAge);
+
         var violations = validator.validate(request);
+
         assertThat(violations).isEmpty();
     }
 
     @Test
     void nameAndAgeInvalid() {
         Request request = new Request("", -1);
+
         var violations = validator.validate(request);
+
         assertThat(violations).hasSize(2);
         Iterator<ConstraintViolation<Request>> iterator = violations.iterator();
         assertThat(iterator.next().getMessage()).isEqualTo("Age should be positive");
