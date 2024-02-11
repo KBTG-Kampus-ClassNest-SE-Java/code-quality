@@ -3,6 +3,7 @@
 ## Additional Example
 
 - `request-validation-testing` - Example of request validation testing
+- `architecture-testing` - Example of architectural testing
 
 ## Related Repository
 
