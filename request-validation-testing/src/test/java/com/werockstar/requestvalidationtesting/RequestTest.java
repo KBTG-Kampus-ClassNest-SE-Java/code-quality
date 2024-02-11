@@ -5,6 +5,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
@@ -22,6 +23,7 @@ public class RequestTest {
     }
 
     @Test
+    @DisplayName("age should be positive")
     void ageShouldBePositive() {
         String dummyName = "WeRockStar";
         Request request = new Request(dummyName, 23);
@@ -32,6 +34,7 @@ public class RequestTest {
     }
 
     @Test
+    @DisplayName("name should be non-empty")
     void nameShouldNotBeEmpty() {
         int dummyAge = 23;
         Request request = new Request("WeRockStar", dummyAge);
@@ -42,6 +45,7 @@ public class RequestTest {
     }
 
     @Test
+    @DisplayName("both name and age invalid should return 2 violations")
     void nameAndAgeInvalid() {
         Request request = new Request("", -1);
 

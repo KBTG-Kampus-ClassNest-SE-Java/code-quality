@@ -1,7 +1,6 @@
 package com.werockstar.requestvalidationtesting;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,5 +22,6 @@ public class HelloController {
 record Response(String message) {
 }
 
-record Request(@NotEmpty(message = "The name must be defined.") String name, @Positive(message = "Age should be positive") int age) {
+record Request(@NotEmpty(message = "The name must be defined.") String name,
+               @Positive(message = "Age should be positive") int age) {
 }
