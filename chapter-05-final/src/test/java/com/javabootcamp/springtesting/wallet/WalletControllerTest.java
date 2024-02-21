@@ -53,6 +53,10 @@ class WalletControllerTest {
         Wallet kotlinWallet = new Wallet();
         kotlinWallet.setWalletName("Kotlin Wallet");
 
+        /*
+        We can use BDDMockito given() method to stub the method call.
+        given(walletService.getWalletList()).willReturn(List.of(javaWallet, kotlinWallet));
+         */
         when(walletService.getWalletList()).thenReturn(List.of(javaWallet, kotlinWallet));
 
         mockMvc.perform(get("/api/wallets"))
